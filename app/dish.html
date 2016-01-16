@@ -57,6 +57,44 @@
                               </footer>
                           </blockquote>
                       </div>
+		      <div>
+                <form class="form-horizontal" name="feedbackForm" ng-submit="sendFeedback()" nonvalidate role="form">
+
+		    <div class="form-group">
+                        <label for="author" class="col-sm-3 control-label">Your name</label>
+                        <div class="col-sm-9">
+				<input type="text" class="form-control" id="author" name="author" placeholder="Enter your name" ng-model="comment.author">
+                        </div>
+                    </div>
+		    <div class="form-group">
+			    <label for="stars" class="col-sm-3 control-label">Number of stars</label>
+			    <div class="col-xs-offset-2">
+				    <label class="radio-inline">
+				      <input type="radio" name="optradio">1
+				    </label>
+				    <label class="radio-inline">
+				      <input type="radio" name="optradio">2
+				    </label>
+				    <label class="radio-inline">
+				      <input type="radio" name="optradio">3
+				    </label>
+				    <label class="radio-inline">
+				      <input type="radio" name="optradio">4
+				    </label>
+				    <label class="radio-inline">
+				      <input type="radio" name="optradio">5
+				    </label>
+			    </div>
+		    </div>
+		    <div class="form-group">
+			    <label for="comment" class="col-sm-3 control-label">Your comments</label>
+			    <div class="col-sm-9">
+				    <textarea rows="5" type="textarea" class="form-control" id="comment" name="comment"></textarea>
+			    </div>
+			</div>
+
+		</form>
+	    	      </div>
                    </div>
                 </div>
             </div>
