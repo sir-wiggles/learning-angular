@@ -112,15 +112,40 @@ angular.module('confusionApp', [])
 	.controller("DishCommentController", ['$scope', function($scope) {
             //Step 1: Create a JavaScript object to hold the comment from the form
 
+		$scope.preview = false;
 		$scope.commentFeedback = {
 			author: "",
-			stars: 5,
+			rating: 5,
 			comment: "",
-		}
+			date: "",
+		};
+
+		$scope.$watch("commentFeedback.comment", function(){
+			console.log("watch")
+			if (typeof $scope.commentFeedback.comment === 'undefined') {
+				$scope.preview = false;
+				return
+			}
+			if ($scope.commentFeedback.comment.length > 0) {
+				$scope.preview = true;
+			} else {
+				$scope.preview = false;
+			}
+		});
 
             $scope.submitComment = function () {
 
-		    console.log($scope.commentFeedback)
+		    console.log($scope.commentFeedback);
+			var date = new Date().toISOString();
+			$scope.commentFeedback.date = date
+			var newObj = JSON.parse(JSON.stringify($scope.commentFeedback));
+			$scope.dish.comments.push(newObj);
+			$scope.commentFeedback = {
+				author: "",
+				rating: 5,
+				comment: "",
+				date: "",
+			};
                 //Step 2: This is how you record the date
                 // "The date property of your JavaScript object holding the comment" = new Date().toISOString();
 

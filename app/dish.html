@@ -58,9 +58,12 @@
                           </blockquote>
                       </div>
 		      <div ng-controller="DishCommentController">
-			      <blockquote ng-show="{{commentFeedback.comment}}.text().replace(' ','').length">
-				     <p>{{commentFeedback.stars}}<p>
+			      <blockquote ng-show="preview">
+				     <p>{{commentFeedback.rating}} Stars<p>
 				     <h5>{{commentFeedback.comment}}</h5>
+				     <footer>
+					     <span>{{commentFeedback.author}}</span>
+				     </footer>
 			     </blockquote>
 			<div class="row row-content">
 				<form class="form-horizontal" name="comment" ng-submit="submitComment()">
@@ -75,7 +78,7 @@
 						<label for="rating" class="col-sm-2 control-label">Number of stars</label>
 						<div class="col-sm-10 btn-group" data-toggle="buttons">
 							<label class="radio-inline" data-ng-repeat="s in [1,2,3,4,5]">
-								<input type="radio" id="stars{{s}}" name="rating" ng-model="$parent.commentFeedback.stars" value={{s}}> {{s}}
+								<input type="radio" id="stars{{s}}" name="rating" ng-model="$parent.commentFeedback.rating" value={{s}}> {{s}}
 							</label>
 						</div>
 					</div>
