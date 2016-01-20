@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 <html lang="en" ng-app="confusionApp">
-    <head>
+
          <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -57,43 +57,42 @@
                               </footer>
                           </blockquote>
                       </div>
-		      <div>
-                <form class="form-horizontal" name="feedbackForm" ng-submit="sendFeedback()" nonvalidate role="form">
-
-		    <div class="form-group">
-                        <label for="author" class="col-sm-3 control-label">Your name</label>
-                        <div class="col-sm-9">
-				<input type="text" class="form-control" id="author" name="author" placeholder="Enter your name" ng-model="comment.author">
-                        </div>
-                    </div>
-		    <div class="form-group">
-			    <label for="stars" class="col-sm-3 control-label">Number of stars</label>
-			    <div class="col-xs-offset-2">
-				    <label class="radio-inline">
-				      <input type="radio" name="optradio">1
-				    </label>
-				    <label class="radio-inline">
-				      <input type="radio" name="optradio">2
-				    </label>
-				    <label class="radio-inline">
-				      <input type="radio" name="optradio">3
-				    </label>
-				    <label class="radio-inline">
-				      <input type="radio" name="optradio">4
-				    </label>
-				    <label class="radio-inline">
-				      <input type="radio" name="optradio">5
-				    </label>
-			    </div>
-		    </div>
-		    <div class="form-group">
-			    <label for="comment" class="col-sm-3 control-label">Your comments</label>
-			    <div class="col-sm-9">
-				    <textarea rows="5" type="textarea" class="form-control" id="comment" name="comment"></textarea>
-			    </div>
+		      <div ng-controller="DishCommentController">
+			      <blockquote ng-show="{{commentFeedback.comment}}.text().replace(' ','').length">
+				     <p>{{commentFeedback.stars}}<p>
+				     <h5>{{commentFeedback.comment}}</h5>
+			     </blockquote>
+			<div class="row row-content">
+				<form class="form-horizontal" name="comment" ng-submit="submitComment()">
+					<div class="form-group" ng-class="{'has-error': comment.author.$invalid && comment.author.$dirty}">
+						<label for="author" class="col-sm-2 control-label">Your name</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="author" name="author" ng-model="commentFeedback.author" required>
+							<span ng-show="comment.author.$error.required && !comment.author.$pristine" class="help-block">Your name is required</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="rating" class="col-sm-2 control-label">Number of stars</label>
+						<div class="col-sm-10 btn-group" data-toggle="buttons">
+							<label class="radio-inline" data-ng-repeat="s in [1,2,3,4,5]">
+								<input type="radio" id="stars{{s}}" name="rating" ng-model="$parent.commentFeedback.stars" value={{s}}> {{s}}
+							</label>
+						</div>
+					</div>
+					<div class="form-group" ng-class="{'has-error': comment.comment.$invalid && comment.comment.$dirty}">
+						<label for "comment" class="col-sm-2 control-label">Your comments</label>
+						<div class="col-sm-10">
+							<textarea class="form-control" name="comment" rows="5" ng-model="commentFeedback.comment" required></textarea>
+							<span ng-show="comment.comment.$error.required && !comment.comment.$pristine" class="help-block">A comment is required</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-2 col-sm-offset-2">
+							<button class="btn btn-primary" type="submit" ng-disabled="commentFeedback.$invalid">Submit Comment</button>
+						</div>
+					</div>
+				</form>
 			</div>
-
-		</form>
 	    	      </div>
                    </div>
                 </div>
